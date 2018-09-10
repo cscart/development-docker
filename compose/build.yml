@@ -1,0 +1,72 @@
+version: '3'
+services:
+
+  nginx:
+    build:
+      context: ../images/nginx
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:nginx-latest-alpine3.7
+
+  php5.6-fpm:
+    build:
+      args:
+        PHP_VERSION: ${PHP56_VERSION}
+      context: ../images/php/fpm/5.6
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP56_VERSION}-fpm-alpine3.7
+
+  php7.0-fpm:
+    build:
+      args:
+        PHP_VERSION: ${PHP70_VERSION}
+      context: ../images/php/fpm/7.0
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP70_VERSION}-fpm-alpine3.7
+
+  php7.1-fpm:
+    build:
+      args:
+        PHP_VERSION: ${PHP71_VERSION}
+      context: ../images/php/fpm/7.1
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP71_VERSION}-fpm-alpine3.7
+
+  php7.2-fpm:
+    build:
+      args:
+        PHP_VERSION: ${PHP72_VERSION}
+      context: ../images/php/fpm/7.2
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP72_VERSION}-fpm-alpine3.7
+
+  php5.6-apache:
+    build:
+      args:
+        PHP_VERSION: ${PHP56_VERSION}
+      context: ../images/php/apache/5.6
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP56_VERSION}-apache-alpine3.7
+
+  php7.0-apache:
+    build:
+      args:
+        PHP_VERSION: ${PHP70_VERSION}
+      context: ../images/php/apache/7.0
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP70_VERSION}-apache-alpine3.7
+
+  php7.1-apache:
+    build:
+      args:
+        PHP_VERSION: ${PHP71_VERSION}
+      context: ../images/php/apache/7.1
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP71_VERSION}-apache-alpine3.7
+
+  php7.2-apache:
+    build:
+      args:
+        PHP_VERSION: ${PHP72_VERSION}
+      context: ../images/php/apache/7.2
+      dockerfile: Dockerfile
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP72_VERSION}-apache-alpine3.7

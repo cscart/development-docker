@@ -1,0 +1,180 @@
+version: '3'
+services:
+
+  nginx56:
+    image: ${REGISTRY}protopopys/cscart-sandbox:nginx-latest-alpine3.7
+    command: /bin/sh -c "envsubst '$${DOMAIN},$${CSCART_ADDRESS}' < /etc/nginx/templates/cscart.dist > /etc/nginx/conf.d/cscart.conf && cp -f /etc/nginx/templates/*.conf /etc/nginx/xtra/ && nginx-debug -g 'daemon off;'"
+    environment:
+      DOMAIN: ${DOMAIN}
+      CSCART_ADDRESS: ${PHP56_ADDRESS}
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      php56:
+      public:
+        ipv4_address: 172.122.0.56
+    restart: always
+
+  php56-fpm:
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP56_VERSION}-fpm-alpine3.7
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      private:
+      php56:
+        aliases:
+          - php-fpm
+    restart: always
+
+    ################################################################################
+
+  nginx70:
+    image: ${REGISTRY}protopopys/cscart-sandbox:nginx-latest-alpine3.7
+    command: /bin/sh -c "envsubst '$${DOMAIN},$${CSCART_ADDRESS}' < /etc/nginx/templates/cscart.dist > /etc/nginx/conf.d/cscart.conf && cp -f /etc/nginx/templates/*.conf /etc/nginx/xtra/ && nginx-debug -g 'daemon off;'"
+    environment:
+      DOMAIN: ${DOMAIN}
+      CSCART_ADDRESS: ${PHP70_ADDRESS}
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      php70:
+      public:
+        ipv4_address: 172.122.0.70
+    restart: always
+
+  php70-fpm:
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP70_VERSION}-fpm-alpine3.7
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      private:
+      php70:
+        aliases:
+          - php-fpm
+    restart: always
+
+    ################################################################################
+
+  nginx71:
+    image: ${REGISTRY}protopopys/cscart-sandbox:nginx-latest-alpine3.7
+    command: /bin/sh -c "envsubst '$${DOMAIN},$${CSCART_ADDRESS}' < /etc/nginx/templates/cscart.dist > /etc/nginx/conf.d/cscart.conf && cp -f /etc/nginx/templates/*.conf /etc/nginx/xtra/ && nginx-debug -g 'daemon off;'"
+    environment:
+      DOMAIN: ${DOMAIN}
+      CSCART_ADDRESS: ${PHP71_ADDRESS}
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      php71:
+      public:
+        ipv4_address: 172.122.0.71
+    restart: always
+
+  php71-fpm:
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP71_VERSION}-fpm-alpine3.7
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      private:
+      php71:
+        aliases:
+          - php-fpm
+    restart: always
+
+    ################################################################################
+
+  nginx72:
+    image: ${REGISTRY}protopopys/cscart-sandbox:nginx-latest-alpine3.7
+    command: /bin/sh -c "envsubst '$${DOMAIN},$${CSCART_ADDRESS}' < /etc/nginx/templates/cscart.dist > /etc/nginx/conf.d/cscart.conf && cp -f /etc/nginx/templates/*.conf /etc/nginx/xtra/ && nginx-debug -g 'daemon off;'"
+    environment:
+      DOMAIN: ${DOMAIN}
+      CSCART_ADDRESS: ${PHP72_ADDRESS}
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      php72:
+      public:
+        ipv4_address: 172.122.0.72  
+    restart: always
+
+  php72-fpm:
+    image: ${REGISTRY}protopopys/cscart-sandbox:php${PHP72_VERSION}-fpm-alpine3.7
+    volumes:
+      - ${CSCART_VOLUMES}/cscart:/var/www/html:rw
+    networks:
+      private:
+      php72:
+        aliases:
+          - php-fpm
+    restart: always
+
+################################################################################
+
+  postfix:
+    image: ${REGISTRY}protopopys/postfix:debian-jessie
+    environment:
+      maildomain: ${DOMAIN}
+      smtp_user: ${SMTP_USER}:${SMTP_PASS}
+      maxmailsize: ${MAXMAILSIZE}
+    networks:
+      private:
+        aliases:
+          - postfix
+ 
+  proxy:
+    image: ${REGISTRY}protopopys/cscart-sandbox:nginx-latest-alpine3.7
+    command: /bin/sh -c "envsubst '$${PHP72_ADDRESS},$${PHP71_ADDRESS},$${PHP70_ADDRESS},$${PHP56_ADDRESS},$${DOMAIN}' < /etc/nginx/templates/proxy.dist > /etc/nginx/conf.d/proxy.conf && cp -f /etc/nginx/templates/*.conf /etc/nginx/xtra/ && nginx-debug -g 'daemon off;'"
+    environment:
+      DOMAIN: ${DOMAIN}
+      PHP72_ADDRESS: ${PHP72_ADDRESS}
+      PHP71_ADDRESS: ${PHP71_ADDRESS}
+      PHP70_ADDRESS: ${PHP70_ADDRESS}
+      PHP56_ADDRESS: ${PHP56_ADDRESS}
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - public  
+    restart: always
+
+  mysql:
+    image: mysql:5.7.22
+    command: mysqld --sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" --character_set_server="utf8" --character_set_filesystem="utf8" --collation-server="utf8_general_ci" --init-connect='SET NAMES utf8' --init_connect='SET collation_connection = utf8_general_ci' --skip-character-set-client-handshake
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_RPASS}
+    volumes:
+      - ${MYSQL_LOGS}:/var/log:rw
+      - ${MYSQL_DATA}:/var/lib/mysql:rw
+      - ${MYSQL_CONF}:/etc/mysql/conf.d:ro
+    networks:
+      private:
+        aliases:
+          - database
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - private
+
+################################################################################
+networks:
+  public:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.122.0.0/24
+
+  private:
+    driver: bridge
+  php56:
+    driver: bridge
+  php70:
+    driver: bridge
+  php71:
+    driver: bridge
+  php72:
+    driver: bridge

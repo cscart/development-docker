@@ -1,0 +1,352 @@
+################################################################################
+include xtra/upstream.conf;
+
+server {
+    
+    listen  80;
+    server_name ${CSCART_ADDRESS};
+    server_name www.${CSCART_ADDRESS};
+
+    ############################################################################
+
+    charset utf-8;
+
+    ############################################################################
+
+    access_log  /var/log/nginx/access.log json;
+    error_log   /var/log/nginx/error.log warn;
+
+    ############################################################################
+
+    include xtra/error-40X.conf;
+    include xtra/error-50X.conf;
+
+    ############################################################################
+
+    set $root "/var/www/html";
+    root $root;
+
+    ############################################################################
+
+    error_page 598 = @backend;
+
+    ############################################################################
+
+    location @backend {
+        try_files $uri $uri/ /$1$3 /$3 /$1index.php =404;
+        fastcgi_pass www;
+        fastcgi_index index.php;
+        fastcgi_read_timeout 360;
+        include xtra/fastcgi_params.conf;
+    }
+
+    ############################################################################
+    # Only for Sandbox
+    location @sandbox {
+        rewrite  ^/(\w+/)?(\w+/)?(.*)$ /$1index.php?$args last;
+    }
+
+    ############################################################################
+
+    location  / {
+        try_files $uri $uri/ @sandbox;
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?api/ {
+        rewrite ^/(\w+/)?(\w+/)?api/(.*)$ /$1api.php?_d=$3&ajax_custom=1&$args last;
+        rewrite_log off;
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?var/database/ {
+        return 404;
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/backups/ {
+        return 404;
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/restore/ {
+        return 404;
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/themes_repository/ {
+        allow all;
+        location ~* \.(tpl|php.?)$ {
+            return 404;
+        }
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/ {
+        return 404;
+        location ~* /(\w+/)?(\w+/)?(.+\.(js|css|png|jpe?g|gz|yml|xml))$ {
+            try_files $uri $uri/ /$1$3 /$3 /$1index.php?$args;
+            allow all;
+            access_log off;
+            expires 1M;
+            add_header Cache-Control public;
+            add_header Access-Control-Allow-Origin *;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?app/payments/ {
+        return 404;
+        location ~ \.php$ {
+            return 598;
+        }
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?app/addons/rus_exim_1c/ {
+        return 404;
+        location ~ \.php$ {
+            return 598;
+        }
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?app/ {
+        return 404;
+    }
+
+    ############################################################################
+
+    location ~* /(\w+/)?(\w+/)?(.+\.(jpe?g|jpg|ico|gif|png|css|js|pdf|txt|tar|woff|svg|ttf|eot|csv|zip|xml|yml))$ {
+        access_log off;
+        try_files $uri $uri/ /$1$3 /$3 /$1index.php?$args;
+        expires max;
+        add_header Access-Control-Allow-Origin *;
+        add_header Cache-Control public;
+    }
+
+    ############################################################################      
+
+    location ~ ^/(\w+/)?(\w+/)?design/ {
+        allow all;
+        location ~* \.(tpl|php.?)$ {
+            return 404;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?images/ {
+        allow all;
+        location ~* \.(php.?)$ {
+            return 404;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?js/ {
+        allow all;
+        location ~* \.(php.?)$ {
+            return 404;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?init.php {
+        return 404;
+    }
+
+    location ~* \.(tpl.?)$ {
+        return 404;
+    }
+
+    location ~ /\.(ht|git) {
+        return 404;
+    }
+
+    location ~* /(\w+/)?(\w+/)?(.+\.php)$ {
+        return 598 ;
+    }
+
+    ################################################################################
+
+}
+
+################################################################################
+
+server {
+    
+    listen  443 ssl http2;
+    server_name ${CSCART_ADDRESS};
+    server_name www.${CSCART_ADDRESS};
+
+    ############################################################################
+
+    charset utf-8;
+
+    ############################################################################
+
+    access_log  /var/log/nginx/access.log json;
+    error_log   /var/log/nginx/error.log warn;
+
+    ############################################################################
+
+    include xtra/error-40X.conf;
+    include xtra/error-50X.conf;
+
+    ############################################################################
+
+    ssl                         on;
+    ssl_certificate             /etc/nginx/ssl/${DOMAIN}.crt;
+    ssl_certificate_key         /etc/nginx/ssl/${DOMAIN}.key;
+    include                     xtra/ssl.conf;
+
+    ############################################################################
+
+    set $root "/var/www/html";
+    root $root;
+
+    ############################################################################
+
+    error_page 598 = @backend;
+
+    ############################################################################
+
+    location @backend {
+        try_files $uri $uri/ /$1$3 /$3 /$1index.php =404;
+        fastcgi_pass www;
+        fastcgi_index index.php;
+        fastcgi_read_timeout 360;
+        include xtra/fastcgi_params.conf;
+        include xtra/fastcgi_params_ssl.conf;
+    }
+
+    ############################################################################
+    # Only for Sandbox
+    location @sandbox {
+        rewrite  ^/(\w+/)?(\w+/)?(.*)$ /$1index.php?$args last;
+    }
+
+    ############################################################################
+
+    location  / {
+        try_files $uri $uri/ @sandbox;
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?api/ {
+        rewrite ^/(\w+/)?(\w+/)?api/(.*)$ /$1api.php?_d=$3&ajax_custom=1&$args last;
+        rewrite_log off;
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?var/database/ {
+        return 404;
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/backups/ {
+        return 404;
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/restore/ {
+        return 404;
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/themes_repository/ {
+        allow all;
+        location ~* \.(tpl|php.?)$ {
+            return 404;
+        }
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?var/ {
+        return 404;
+        location ~* /(\w+/)?(\w+/)?(.+\.(js|css|png|jpe?g|gz|yml|xml))$ {
+            try_files $uri $uri/ /$1$3 /$3 /$1index.php?$args;
+            allow all;
+            access_log off;
+            expires 1M;
+            add_header Cache-Control public;
+            add_header Access-Control-Allow-Origin *;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?app/payments/ {
+        return 404;
+        location ~ \.php$ {
+            return 598;
+        }
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?app/addons/rus_exim_1c/ {
+        return 404;
+        location ~ \.php$ {
+            return 598;
+        }
+    }
+
+    location ~ ^/(\w+/)?(\w+/)?app/ {
+        return 404;
+    }
+
+    ############################################################################
+
+    location ~* /(\w+/)?(\w+/)?(.+\.(jpe?g|jpg|ico|gif|png|css|js|pdf|txt|tar|woff|svg|ttf|eot|csv|zip|xml|yml))$ {
+        access_log off;
+        try_files $uri $uri/ /$1$3 /$3 /$1index.php?$args;
+        expires max;
+        add_header Access-Control-Allow-Origin *;
+        add_header Cache-Control public;
+    }
+
+    ############################################################################      
+
+    location ~ ^/(\w+/)?(\w+/)?design/ {
+        allow all;
+        location ~* \.(tpl|php.?)$ {
+            return 404;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?images/ {
+        allow all;
+        location ~* \.(php.?)$ {
+            return 404;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?js/ {
+        allow all;
+        location ~* \.(php.?)$ {
+            return 404;
+        }
+    }
+
+    ############################################################################
+
+    location ~ ^/(\w+/)?(\w+/)?init.php {
+        return 404;
+    }
+
+    location ~* \.(tpl.?)$ {
+        return 404;
+    }
+
+    location ~ /\.(ht|git) {
+        return 404;
+    }
+
+    location ~* /(\w+/)?(\w+/)?(.+\.php)$ {
+        return 598 ;
+    }
+
+    ################################################################################
+
+}

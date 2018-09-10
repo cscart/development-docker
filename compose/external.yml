@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  nginx56:
+    volumes:
+      - ${CSCART_VOLUMES}/ssl:/etc/nginx/ssl
+
+    ################################################################################
+
+  nginx70:
+    volumes:
+      - ${CSCART_VOLUMES}/ssl:/etc/nginx/ssl
+
+    ################################################################################
+
+  nginx71:
+    volumes:
+      - ${CSCART_VOLUMES}/ssl:/etc/nginx/ssl
+
+    ################################################################################
+
+  nginx72:
+    volumes:
+      - ${CSCART_VOLUMES}/ssl:/etc/nginx/ssl
+
+################################################################################
+
+  postfix:
+    volumes:
+      - ${CSCART_VOLUMES}/ssl:/etc/postfix/certs:ro 
+
+  proxy:
+    command: /bin/sh -c "envsubst '$${PHP72_ADDRESS},$${PHP71_ADDRESS},$${PHP70_ADDRESS},$${PHP56_ADDRESS},$${DOMAIN}' < /etc/nginx/templates/proxy.dist > /etc/nginx/conf.d/proxy.dist && cp -f /etc/nginx/templates/*.conf /etc/nginx/xtra/ && /usr/bin/supervisord -c /etc/supervisord.conf"
+    environment:
+      WILDCARD: ${WILDCARD}
+      DNS_API: ${DNS_API}
+      CF_Key: ${CF_Key}
+      CF_Email: ${CF_Email}
+    volumes:
+      - ${CSCART_VOLUMES}/acme:/acme.sh:rw
+      - ${CSCART_VOLUMES}/ssl:/etc/nginx/ssl
+
+################################################################################
