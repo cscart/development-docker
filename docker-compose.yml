@@ -1,0 +1,60 @@
+version: "3.1"
+services:
+
+  mysql5.7:
+    image: mysql:5.7
+    container_name: mysql5.7
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./app/db:/var/lib/mysql
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    working_dir: /etc/nginx
+    volumes:
+      - ./app:/app
+      - ./config/nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - php5.6
+      - php7.3
+      - php7.4
+
+  php5.6:
+    build:
+      context: ./config/php5.6
+      dockerfile: Dockerfile
+    container_name: php5.6
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./config/php5.6/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./bin/sendmail:/usr/local/bin/sendmail
+
+  php7.3:
+    build:
+      context: ./config/php7.3
+      dockerfile: Dockerfile
+    container_name: php7.3
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./config/php5.6/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./bin/sendmail:/usr/local/bin/sendmail
+
+  php7.4:
+    build:
+      context: ./config/php7.4
+      dockerfile: Dockerfile
+    container_name: php7.4
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./config/php7.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./bin/sendmail:/usr/local/bin/sendmail
