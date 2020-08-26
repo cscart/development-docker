@@ -53,7 +53,7 @@ Installation
         $ make -f Makefile run
 
 #. Access the now running site on http://localhost and enter the required details.  
-   Note when entering the MySQL address enter ``mysql5.7``.
+   Note when entering the MySQL address enter ``mysql5.7``, the username is ``root`` and the password is ``root``.
 
 -----------------------------------
 Working with different PHP versions
