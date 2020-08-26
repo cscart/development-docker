@@ -31,9 +31,15 @@ Installation
 
     .. code-block:: bash
 
-        $ mkdir -p app/www
+        $ mkdir -p app/www app/log/nginx
 
-#. Clone CS-Cart repository or unpack the distribution archive into the ``app/www`` directory.
+#. Clone CS-Cart repository or unpack the distribution archive into the ``app/www`` directory
+#. Setup the correct permissions for the installation:
+
+    .. code-block:: bash
+
+        $ chmod 777 -R app/www/images app/www/design app/www/var
+   
 #. Enable the default application config for nginx:
 
     .. code-block:: bash
