@@ -52,6 +52,9 @@ Installation
 
         $ make -f Makefile run
 
+#. Access the now running site on http://localhost and enter the required details.
+   Note when entering the MySQL address enter `mysql5.7`.
+
 -----------------------------------
 Working with different PHP versions
 -----------------------------------
