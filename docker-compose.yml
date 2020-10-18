@@ -45,7 +45,7 @@ services:
     working_dir: /app
     volumes:
       - ./app:/app
-      - ./config/php5.6/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./config/php7.3/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
 
   php7.4:
