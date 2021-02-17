@@ -50,7 +50,7 @@ Installation
 Working with different PHP versions
 -----------------------------------
 
-PHP 7.3 is used by default.
+PHP 7.4 is used by default.
 
 To use the specific PHP version for your requests, add the following prefix to the domain you request:
 
@@ -124,7 +124,7 @@ See comments in the ``config/php*/Dockerfile`` files.
 Работа с разными версиями PHP
 -----------------------------
 
-По умолчанию используется PHP 7.3.
+По умолчанию используется PHP 7.4.
 
 Чтобы явно указать версию PHP для конкретного запроса, добавьте к домену следующую приставку:
 

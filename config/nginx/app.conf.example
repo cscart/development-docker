@@ -1,7 +1,7 @@
 # Determine PHP version used for the request
 map $http_host $fastcgi_backend {
     hostnames;
-    default   php7.3:9000;
+    default   php7.4:9000;
     ~^php5.6. php5.6:9000;
     ~^php7.3. php7.3:9000;
     ~^php7.4. php7.4:9000;
