@@ -11,7 +11,7 @@ English manual
 
 Docker-based development environment:
 
-* PHP versions: 7.4, 7.3 and 5.6.
+* PHP versions: 8.0, 7.4, 7.3 and 5.6.
 * MySQL 5.7 database server.
 * nginx web server.
 
@@ -57,6 +57,7 @@ To use the specific PHP version for your requests, add the following prefix to t
 * ``php5.6.`` for PHP 5.6.
 * ``php7.3.`` for PHP 7.3.
 * ``php7.4.`` for PHP 7.4.
+* ``php8.0.`` for PHP 8.0.
 
 ---------------
 Sending e-mails
@@ -84,7 +85,7 @@ See comments in the ``config/php*/Dockerfile`` files.
 
 Среда для разработки на базе Docker:
 
-* Версии PHP: 7.4, 7.3 and 5.6.
+* Версии PHP: 8.0, 7.4, 7.3 и 5.6.
 * Сервер баз данных MySQL 5.7.
 * Веб-сервер nginx.
 
@@ -130,6 +131,7 @@ See comments in the ``config/php*/Dockerfile`` files.
 * ``php5.6.`` для PHP 5.6.
 * ``php7.3.`` для PHP 7.3.
 * ``php7.4.`` для PHP 7.4.
+* ``php8.0.`` для PHP 8.0.
 
 ------------------
 Отправка e-mail'ов
