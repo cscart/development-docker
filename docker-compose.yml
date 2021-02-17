@@ -58,3 +58,14 @@ services:
       - ./app:/app
       - ./config/php7.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
+
+  php8.0:
+    build:
+      context: ./config/php8.0
+      dockerfile: Dockerfile
+    container_name: php8.0
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./bin/sendmail:/usr/local/bin/sendmail
