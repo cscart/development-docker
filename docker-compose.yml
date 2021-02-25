@@ -10,6 +10,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./app/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
   nginx:
     image: nginx:alpine
@@ -25,6 +27,7 @@ services:
       - php5.6
       - php7.3
       - php7.4
+      - php8.0
 
   php5.6:
     build:
