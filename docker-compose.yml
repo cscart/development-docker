@@ -48,6 +48,8 @@ services:
       - ./app:/app
       - ./config/php7.3/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
+    environment:
+        PHP_IDE_CONFIG: serverName=localhost
 
   php7.4:
     build:
@@ -59,6 +61,8 @@ services:
       - ./app:/app
       - ./config/php7.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
+    environment:
+        PHP_IDE_CONFIG: serverName=localhost
 
   php8.0:
     build:
@@ -70,3 +74,5 @@ services:
       - ./app:/app
       - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
+    environment:
+        PHP_IDE_CONFIG: serverName=localhost

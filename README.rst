@@ -77,7 +77,9 @@ See comments in the ``config/nginx/app.conf.example`` file if you need to host m
 Enabling xDebug for PHP containers
 ----------------------------------
 
-See comments in the ``config/php*/Dockerfile`` files.
+xDebug 3 is already configured for PHP7 and PHP8 containers. All you have to do is to uncomment the extension installation in the ``config/php*/Dockerfile`` files.
+
+You can read about configuring PHPStorm to work with Docker and xDebug 3 in the `"Debugging PHP" <https://thecodingmachine.io/configuring-xdebug-phpstorm-docker>`_ article.
 
 ==================
 Русская инструкция
@@ -151,4 +153,6 @@ PHP по умолчанию не отправляют настоящих пис�
 Поддержка xDebug для PHP
 ------------------------
 
-См. комментарии в файлах ``config/php*/Dockerfile``.
+xDebug уже настроен для использования в контейнерах с PHP7 и PHP8. Для его включения нужно раскомментировать установку модуля в ``config/php*/Dockerfile``.
+
+О настройке PHPStorm для работы с Docker и xDebug 3 можно прочитать в статье `"PHP: Настраиваем отладку" <https://handynotes.ru/2020/12/phpstorm-php-8-docker-xdebug-3.html>`_.
