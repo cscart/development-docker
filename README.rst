@@ -50,11 +50,15 @@ Installation
 Connecting to a database in a docker environment
 ------------------------------------------------
 
-#. Connect to the database using the mysql console client:
+Connect to the database using the mysql console client:
 
     .. code-block:: bash
 
-        $ mysql -hmysql5.7 -uroot -proot
+        $ mysql -h<hostname> -u<user> -p<password>
+        
+<hostname> - the name of the container from which the connection is made
+<user> - MySQL username
+<password> - MySQL user password 
 
 -----------------------------------
 Working with different PHP versions
@@ -136,11 +140,15 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 Подключение к базе данных в docker-окружении
 --------------------------------------------
 
-#. Подключаемся к БД с помощью консольного клиента mysql:
+Подключаемся к БД с помощью консольного клиента mysql:
 
     .. code-block:: bash
 
-        $ mysql -h<> -u<> -p<>
+        $ mysql -h<hostname> -u<user> -p<password>
+        
+<hostname> - имя контейнера, с которого происходит подключение
+<user> - имя пользователя MySQL
+<password> - пароль пользователя MySQL
 
 -----------------------------
 Работа с разными версиями PHP
