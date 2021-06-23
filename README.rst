@@ -46,6 +46,22 @@ Installation
 
         $ make -f Makefile run
 
+------------------------------------------------
+Connecting to a database in a docker environment
+------------------------------------------------
+
+#. First, you need to enter the container to perform operations from it.
+#. Take the name of the container from the Makefile (for example, "cli-7.4").
+#. Execute the command:
+      .. code block :: bash
+
+          $ sudo make <container name>
+
+#. Connect to the database using the mysql console client:
+      .. code block :: bash
+
+          $ mysql -hmysql5.7 -uroot -proot 
+
 -----------------------------------
 Working with different PHP versions
 -----------------------------------
@@ -66,22 +82,6 @@ Sending e-mails
 PHP containers do not send actual e-mails when using the ``mail()`` function.
 
 All sent emails will be caught and stored in the ``app/log/sendmail`` directory.
-
-------------------------------------------------
-Connecting to a database in a docker environment
-------------------------------------------------
-
-#. First, you need to enter the container to perform operations from it.
-#. Take the name of the container from the Makefile (for example, "cli-7.4").
-#. Execute the command:
-      .. code block :: bash
-
-          $ sudo make <container name>
-
-#. Connect to the database using the mysql console client:
-      .. code block :: bash
-
-          $ mysql -hmysql5.7 -uroot -proot 
 
 ----------------------------------
 Working with multiple applications
