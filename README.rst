@@ -137,6 +137,7 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 --------------------------------------------
 
 #. Подключаемся к БД с помощью консольного клиента mysql:
+
     .. code-block:: bash
 
         $ mysql -h<> -u<> -p<>
