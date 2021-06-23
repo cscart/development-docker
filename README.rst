@@ -50,14 +50,8 @@ Installation
 Connecting to a database in a docker environment
 ------------------------------------------------
 
-#. First, you need to enter the container to perform operations from it.
-#. Take the name of the container from the Makefile (for example, "cli-7.4").
-#. Execute the command:
-    .. code-block:: bash
-
-        $ sudo make <имя контейнера>
-
 #. Connect to the database using the mysql console client:
+
     .. code-block:: bash
 
         $ mysql -hmysql5.7 -uroot -proot
@@ -142,17 +136,10 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 Подключение к базе данных в docker-окружении
 --------------------------------------------
 
-#. Для начала нужно войти в контейнер для выполнения операций из него.
-#. Имя контейнера берём из Makefile (например, "cli-7.4").
-#. Выполняем команду:
-    .. code-block:: bash
-
-        $ sudo make <имя контейнера>
-
 #. Подключаемся к БД с помощью консольного клиента mysql:
     .. code-block:: bash
 
-        $ mysql -hmysql5.7 -uroot -proot
+        $ mysql -h<> -u<> -p<>
 
 -----------------------------
 Работа с разными версиями PHP
