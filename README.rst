@@ -56,11 +56,9 @@ Connect to the database using the mysql console client:
 
         $ mysql -h<hostname> -u<user> -p<password>
         
-<hostname> - the name of the container from which the connection is made.
-
-<user> - MySQL username.
-
-<password> - MySQL user password.
+* <hostname> - the name of the container from which the connection is made.
+* <user> - MySQL username.
+* <password> - MySQL user password.
 
 -----------------------------------
 Working with different PHP versions
@@ -148,11 +146,9 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 
         $ mysql -h<hostname> -u<user> -p<password>
         
-<hostname> - имя контейнера, с которого происходит подключение.
-
-<user> - имя пользователя MySQL.
-
-<password> - пароль пользователя MySQL.
+* <hostname> - имя контейнера, с которого происходит подключение.
+* <user> - имя пользователя MySQL.
+* <password> - пароль пользователя MySQL.
 
 -----------------------------
 Работа с разными версиями PHP
