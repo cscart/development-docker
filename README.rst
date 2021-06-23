@@ -50,7 +50,7 @@ Installation
 MySQL connection
 ----------------
         
-* Database host: mysql5.7.
+* DB host: mysql5.7.
 * User: root.
 * Password: root. 
 
