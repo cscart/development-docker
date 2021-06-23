@@ -53,14 +53,14 @@ Connecting to a database in a docker environment
 #. First, you need to enter the container to perform operations from it.
 #. Take the name of the container from the Makefile (for example, "cli-7.4").
 #. Execute the command:
-      .. code block :: bash
+    .. code-block:: bash
 
-          $ sudo make <container name>
+        $ sudo make <имя контейнера>
 
 #. Connect to the database using the mysql console client:
-      .. code block :: bash
+    .. code-block:: bash
 
-          $ mysql -hmysql5.7 -uroot -proot 
+        $ mysql -hmysql5.7 -uroot -proot
 
 -----------------------------------
 Working with different PHP versions
