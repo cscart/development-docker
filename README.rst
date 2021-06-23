@@ -46,19 +46,14 @@ Installation
 
         $ make -f Makefile run
 
-------------------------------------------------
-Connecting to a database in a docker environment
-------------------------------------------------
-
-Connect to the database using the mysql console client:
-
-    .. code-block:: bash
-
-        $ mysql -h<hostname> -u<user> -p<password>
+----------------
+MySQL connection
+----------------
         
-* <hostname> - the name of the container from which the connection is made.
-* <user> - MySQL username.
-* <password> - MySQL user password.
+* Database host: mysql5.7.
+* User: root.
+* Password: root. 
+
 
 -----------------------------------
 Working with different PHP versions
@@ -136,19 +131,13 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 
         $ make -f Makefile run
 
---------------------------------------------
-Подключение к базе данных в docker-окружении
---------------------------------------------
-
-Подключаемся к БД с помощью консольного клиента mysql:
-
-    .. code-block:: bash
-
-        $ mysql -h<hostname> -u<user> -p<password>
+-------------------
+Подключение к MySQL
+-------------------
         
-* <hostname> - имя контейнера, с которого происходит подключение.
-* <user> - имя пользователя MySQL.
-* <password> - пароль пользователя MySQL.
+* Хост БД: mysql5.7.
+* Пользователь: root.
+* Пароль: root.
 
 -----------------------------
 Работа с разными версиями PHP
