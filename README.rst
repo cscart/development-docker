@@ -46,6 +46,15 @@ Installation
 
         $ make -f Makefile run
 
+----------------
+MySQL connection
+----------------
+        
+* DB host: mysql5.7.
+* User: root.
+* Password: root. 
+
+
 -----------------------------------
 Working with different PHP versions
 -----------------------------------
@@ -121,6 +130,14 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
     .. code-block:: bash
 
         $ make -f Makefile run
+
+-------------------
+Подключение к MySQL
+-------------------
+        
+* Хост БД: mysql5.7.
+* Пользователь: root.
+* Пароль: root.
 
 -----------------------------
 Работа с разными версиями PHP
