@@ -9,7 +9,7 @@ RUN set -xe; \
         curl \
         libzip-dev libcurl4-gnutls-dev libpng-dev libxml2-dev libjpeg-dev libfreetype6-dev \
         libmagickwand-dev; \
-    curl -sL https://deb.nodesource.com/setup_10.x | bash -; \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash -; \
     apt install -y nodejs; \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
     docker-php-ext-install pdo_mysql mysqli gd json zip intl soap mbstring exif bcmath curl sockets; \
