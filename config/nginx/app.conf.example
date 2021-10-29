@@ -127,7 +127,7 @@ server {
 
     location ~ ^/(\w+/)?(\w+/)?var/ {
         return 404;
-        location ~* /(\w+/)?(\w+/)?(.+\.(js|css|png|jpe?g|gz|yml|xml))$ {
+        location ~* /(\w+/)?(\w+/)?(.+\.(js|css|png|jpe?g|gz|yml|xml|svg))$ {
             try_files $uri $uri/ /$2$3 /$3 /index.php?$args;
             allow all;
             access_log off;
