@@ -163,9 +163,17 @@ server {
         add_header Cache-Control public;
     }
 
-    location ~* /(\w+/)?(\w+/)?(.+\.(jpe?g|jpg|ico|gif|png|css|js|pdf|txt|tar|woff|svg|ttf|eot|csv|zip|xml|yml))$ {
+    location ~* /(\w+/)?(\w+/)?(.+\.(css|js|pdf|txt|tar|woff|ttf|eot|csv|zip|xml|yml))$ {
         access_log off;
         try_files $uri $uri/ /$2$3 /$3 /index.php?$args;
+        expires max;
+        add_header Access-Control-Allow-Origin *;
+        add_header Cache-Control public;
+    }
+
+    location ~* /(\w+/)?(\w+/)?(.+\.(png|gif|ico|jpe?g|svg|bmp|webp))$ {
+        access_log off;
+        try_files $uri $uri/ /$2$3 /$3 /index.php?no_session=Y&$args;
         expires max;
         add_header Access-Control-Allow-Origin *;
         add_header Cache-Control public;
