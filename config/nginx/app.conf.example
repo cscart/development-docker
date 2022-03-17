@@ -2,7 +2,6 @@
 map $http_host $fastcgi_backend {
     hostnames;
     default   php7.4:9000;
-    ~^php5.6. php5.6:9000;
     ~^php7.3. php7.3:9000;
     ~^php7.4. php7.4:9000;
     ~^php8.0. php8.0:9000;
@@ -12,7 +11,7 @@ server {
     server_name _;
     listen 80 default_server;
     # If you run multiple applications on a single Docker instance, use this instead:
-    # server_name my-app.test php5.6.my-app.test php7.3.my-app.test php7.4.my-app.test;
+    # server_name my-app.test php7.3.my-app.test php7.4.my-app.test;
     # listen 80;
 
     # Generate certificates and uncomment the following lines if you need SSL:

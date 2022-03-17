@@ -11,7 +11,7 @@ English manual
 
 Docker-based development environment:
 
-* PHP versions: 8.0, 7.4, 7.3 and 5.6.
+* PHP versions: 8.0, 7.4 and 7.3.
 * MySQL 5.7 database server.
 * nginx web server.
 
@@ -63,7 +63,6 @@ PHP 7.4 is used by default.
 
 To use the specific PHP version for your requests, add the following prefix to the domain you request:
 
-* ``php5.6.`` for PHP 5.6.
 * ``php7.3.`` for PHP 7.3.
 * ``php7.4.`` for PHP 7.4.
 * ``php8.0.`` for PHP 8.0.
@@ -96,7 +95,7 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 
 Среда для разработки на базе Docker:
 
-* Версии PHP: 8.0, 7.4, 7.3 и 5.6.
+* Версии PHP: 8.0, 7.4 и 7.3.
 * Сервер баз данных MySQL 5.7.
 * Веб-сервер nginx.
 
@@ -147,7 +146,6 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 
 Чтобы явно указать версию PHP для конкретного запроса, добавьте к домену следующую приставку:
 
-* ``php5.6.`` для PHP 5.6.
 * ``php7.3.`` для PHP 7.3.
 * ``php7.4.`` для PHP 7.4.
 * ``php8.0.`` для PHP 8.0.

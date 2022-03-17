@@ -22,21 +22,9 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - php5.6
       - php7.3
       - php7.4
       - php8.0
-
-  php5.6:
-    build:
-      context: ./config/php5.6
-      dockerfile: Dockerfile
-    container_name: php5.6
-    working_dir: /app
-    volumes:
-      - ./app:/app
-      - ./config/php5.6/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
-      - ./bin/sendmail:/usr/local/bin/sendmail
 
   php7.3:
     build:
