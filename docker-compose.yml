@@ -1,16 +1,16 @@
 version: "3.1"
 services:
-
-  mysql5.7:
+  mysql:
     image: mysql:5.7
-    container_name: mysql5.7
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
     volumes:
       - ./app/db:/var/lib/mysql
     ports:
-      - "3306:3306"
-
+      - "${MYSQL_LOCALHOST_PORT}:3306"
   nginx:
     image: nginx:alpine
     container_name: nginx
@@ -19,48 +19,20 @@ services:
       - ./app:/app
       - ./config/nginx:/etc/nginx/conf.d
     ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - php7.3
+      - "${CSCART_PORT}:80"
+    depends_on
       - php7.4
-      - php8.0
-
-  php7.3:
-    build:
-      context: ./config/php7.3
-      dockerfile: Dockerfile
-    container_name: php7.3
-    working_dir: /app
-    volumes:
-      - ./app:/app
-      - ./config/php7.3/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
-      - ./bin/sendmail:/usr/local/bin/sendmail
-    environment:
-        PHP_IDE_CONFIG: serverName=localhost
-
   php7.4:
     build:
-      context: ./config/php7.4
-      dockerfile: Dockerfile
-    container_name: php7.4
-    working_dir: /app
+      context: config/php
+      dockerfile: 7.4/Dockerfile
+    env_file:
+      - .env
     volumes:
       - ./app:/app
-      - ./config/php7.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
-        PHP_IDE_CONFIG: serverName=localhost
-
-  php8.0:
-    build:
-      context: ./config/php8.0
-      dockerfile: Dockerfile
-    container_name: php8.0
-    working_dir: /app
-    volumes:
-      - ./app:/app
-      - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
-      - ./bin/sendmail:/usr/local/bin/sendmail
-    environment:
-        PHP_IDE_CONFIG: serverName=localhost
+      CSCART_INSTALL: "${CSCART_INSTALL}"
+      PHP_IDE_CONFIG: "serverName=php7.4.cs-cart.local"
+    depends_on:
+      - mysql

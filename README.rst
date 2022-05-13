@@ -11,7 +11,7 @@ English manual
 
 Docker-based development environment:
 
-* PHP versions: 8.0, 7.4 and 7.3.
+* PHP versions: 7.4
 * MySQL 5.7 database server.
 * nginx web server.
 
@@ -63,9 +63,7 @@ PHP 7.4 is used by default.
 
 To use the specific PHP version for your requests, add the following prefix to the domain you request:
 
-* ``php7.3.`` for PHP 7.3.
 * ``php7.4.`` for PHP 7.4.
-* ``php8.0.`` for PHP 8.0.
 
 ---------------
 Sending e-mails
@@ -95,7 +93,7 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 
 Среда для разработки на базе Docker:
 
-* Версии PHP: 8.0, 7.4 и 7.3.
+* Версии PHP: 7.4
 * Сервер баз данных MySQL 5.7.
 * Веб-сервер nginx.
 
@@ -108,21 +106,8 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 
     .. code-block:: bash
 
-        $ git clone git@github.com:cscart/development-docker.git ~/srv
+        $ git clone --recurse-submodules git@github.com:cscart/development-docker.git ~/srv
         $ cd ~/srv
-
-#. Создайте папку для файлов CS-Cart:
-
-    .. code-block:: bash
-
-        $ mkdir -p app/www
-
-#. Склонируйте репозиторий CS-Cart или распакуйте дистрибутив в папку ``app/www``.
-#. Включите приложение со стандартным конфигом nginx:
-
-    .. code-block:: bash
-
-        $ cp config/nginx/app.conf.example config/nginx/app.conf
 
 #. Запустите контейнеры приложения:
 
@@ -146,9 +131,7 @@ You can read about configuring PHPStorm to work with Docker and xDebug 3 in the 
 
 Чтобы явно указать версию PHP для конкретного запроса, добавьте к домену следующую приставку:
 
-* ``php7.3.`` для PHP 7.3.
 * ``php7.4.`` для PHP 7.4.
-* ``php8.0.`` для PHP 8.0.
 
 ------------------
 Отправка e-mail'ов
@@ -168,6 +151,6 @@ PHP по умолчанию не отправляют настоящих пис�
 Поддержка xDebug для PHP
 ------------------------
 
-xDebug уже настроен для использования в контейнерах с PHP7 и PHP8. Для его включения нужно раскомментировать установку модуля в ``config/php*/Dockerfile``.
+xDebug уже настроен для использования в контейнерах. Для его включения нужно раскомментировать установку модуля в ``config/php*/Dockerfile``.
 
 О настройке PHPStorm для работы с Docker и xDebug 3 можно прочитать в статье `"PHP: Настраиваем отладку" <https://handynotes.ru/2020/12/phpstorm-php-8-docker-xdebug-3.html>`_.

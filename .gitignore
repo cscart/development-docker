@@ -1,5 +1,5 @@
-app/*
-!app/db/.gitkeep
-!app/log/sendmail/.gitkeep
+.idea
+.env
 config/nginx/*
 !config/nginx/app.conf.example
+app/www
