@@ -20,7 +20,7 @@ services:
       - ./config/nginx:/etc/nginx/conf.d
     ports:
       - "${CSCART_PORT}:80"
-    depends_on
+    depends_on:
       - php7.4
   php7.4:
     build:
