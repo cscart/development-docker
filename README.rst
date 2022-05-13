@@ -24,7 +24,7 @@ Installation
 
     .. code-block:: bash
 
-        $ git clone git@github.com:cscart/development-docker.git ~/srv
+        $ git clone --recurse-submodules git@github.com:cscart/development-docker.git ~/srv
         $ cd ~/srv
 
 #. Create the directory to store CS-Cart files:
@@ -83,7 +83,7 @@ See comments in the ``config/nginx/app.conf.example`` file if you need to host m
 Enabling xDebug for PHP containers
 ----------------------------------
 
-xDebug 3 is already configured for PHP7 and PHP8 containers. All you have to do is to uncomment the extension installation in the ``config/php*/Dockerfile`` files.
+xDebug 3 is already configured for PHP7. All you have to do is to uncomment the extension installation in the ``config/php*/Dockerfile`` files.
 
 You can read about configuring PHPStorm to work with Docker and xDebug 3 in the `"Debugging PHP" <https://thecodingmachine.io/configuring-xdebug-phpstorm-docker>`_ article.
 
