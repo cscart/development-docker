@@ -1,4 +1,4 @@
 [submodule "app/www"]
 	path = app/www
 	url = git@github.com:searchanise/cs-cart.git
-    branch = se-8418
+	branch = se-8418
