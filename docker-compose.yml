@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.9"
 services:
   mysql:
     image: mysql:5.7
@@ -11,6 +11,10 @@ services:
       - ./app/db:/var/lib/mysql
     ports:
       - "${MYSQL_LOCALHOST_PORT}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-p$MYSQL_ROOT_PASSWORD"]
+      timeout: 20s
+      retries: 10
   nginx:
     image: nginx:alpine
     container_name: nginx
@@ -35,4 +39,5 @@ services:
       CSCART_INSTALL: "${CSCART_INSTALL}"
       PHP_IDE_CONFIG: "serverName=php7.4.cs-cart.local"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
