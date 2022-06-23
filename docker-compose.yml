@@ -17,8 +17,6 @@ services:
       retries: 10
   nginx:
     image: nginx:alpine
-    container_name: nginx
-    working_dir: /etc/nginx
     volumes:
       - ./app:/app
       - ./config/nginx:/etc/nginx/conf.d
@@ -28,13 +26,12 @@ services:
       - php7.4
   php7.4:
     build:
-      context: config/php
+      context: docker/php
       dockerfile: 7.4/Dockerfile
     env_file:
       - .env
     volumes:
       - ./app:/app
-      - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
       CSCART_INSTALL: "${CSCART_INSTALL}"
       PHP_IDE_CONFIG: "serverName=php7.4.cs-cart.local"
