@@ -19,7 +19,7 @@ services:
     image: nginx:alpine
     volumes:
       - ./app:/app
-      - ./config/nginx:/etc/nginx/conf.d
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - "${CSCART_PORT}:80"
     depends_on:
