@@ -111,4 +111,4 @@ if (AREA == 'A') {
 }
 
 // Place your DEV server URL
-define('SE_SERVICE_URL', getenv_docker('SEARCHANISE_SERVICE','http://searchserverapi.com') );
+define('SE_SERVICE_URL', getenv_docker('SEARCHANISE_SERVICE','https://searchserverapi.com') );
