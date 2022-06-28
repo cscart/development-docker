@@ -23,18 +23,55 @@ services:
     ports:
       - "${CSCART_PORT}:80"
     depends_on:
+      - php7.3
       - php7.4
+      - php8.0
+      - php8.1
   php7.4:
+    &default-php
     build:
       context: docker/php
-      dockerfile: 7.4/Dockerfile
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "7.4"
     env_file:
       - .env
     volumes:
       - ./app:/app
     environment:
       CSCART_INSTALL: "${CSCART_INSTALL}"
-      PHP_IDE_CONFIG: "serverName=php7.4.cs-cart.local"
+      PHP_IDE_CONFIG: "serverName=cs-cart.local"
+      CSCART_HOST: "localhost:${CSCART_PORT}"
     depends_on:
       mysql:
         condition: service_healthy
+  php7.3:
+    << : *default-php
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "7.3"
+    environment:
+      CSCART_INSTALL: "no"
+      CSCART_HOST: "php7.3.cs-cart.local:${CSCART_PORT}"
+  php8.0:
+    << : *default-php
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "8.0"
+    environment:
+      CSCART_INSTALL: "no"
+      CSCART_HOST: "php8.0.cs-cart.local:${CSCART_PORT}"
+  php8.1:
+    << : *default-php
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "8.1"
+    environment:
+      CSCART_INSTALL: "no"
+      CSCART_HOST: "php8.1.cs-cart.local:${CSCART_PORT}"
