@@ -18,7 +18,7 @@ git clone --recurse-submodules git@github.com:cscart/development-docker.git cs-c
 cd cs-cart-docker
 ```
 
-* If you do not have access to `github.com:cscart/cscart` repository, simple unpack the distribution archive into the ``app/www`` directory.
+* If you do not have access to `https://github.com/cscart/cs-cart` repository, simple unpack the distribution archive into the ``app/www`` directory.
 
 * Run application containers:
 
@@ -83,7 +83,7 @@ git clone --recurse-submodules git@github.com:cscart/development-docker.git cs-c
 cd cs-cart-docker
 ```
 
-* Если у вас нет доступа к `github.com:cscart/cscart` репозиторию, просто скачайте и распакуйте ваш CS-Cart в папку `app/www`.
+* Если у вас нет доступа к `https://github.com/cscart/cs-cart` репозиторию, просто скачайте и распакуйте ваш CS-Cart в папку `app/www`.
 
 * Запустите контейнеры docker командой:
 
