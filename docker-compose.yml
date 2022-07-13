@@ -64,3 +64,13 @@ services:
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
         PHP_IDE_CONFIG: serverName=localhost
+
+# Change default subnet addresses:
+# networks:
+#  default:
+#    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+#      - subnet: 10.10.0.1/16
+
