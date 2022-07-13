@@ -89,6 +89,25 @@ xDebug 3 is already configured for PHP7 and PHP8 containers. All you have to do 
 
 You can read about configuring PHPStorm to work with Docker and xDebug 3 in the `"Debugging PHP" <https://thecodingmachine.io/configuring-xdebug-phpstorm-docker>`_ article.
 
+------------------------
+Configuring the Docker subnet
+------------------------
+
+Docker-compose creates a subnet with addresses by default 172.18.[0-255].[0-255].
+
+If you run docker locally with a default subnet, then resources using the same addresses will be unavailable - the response will be returned by the local subnet, not the required resource.
+
+To fix the problem, you need to change the address of the docker subnet.
+
+In the docker-compose file.bml shows an example of replacing addresses with 10.10.[0-255].[0-255].
+
+Uncomment the lines in docker-compose.yml and run the following commands:
+
+    .. code-block:: bash
+
+        $ docker network rm $(docker network ls -q)
+        $ docker-compose down && docker-compose up -d
+
 ==================
 Русская инструкция
 ==================
@@ -171,3 +190,22 @@ PHP по умолчанию не отправляют настоящих пис�
 xDebug уже настроен для использования в контейнерах с PHP7 и PHP8. Для его включения нужно раскомментировать установку модуля в ``config/php*/Dockerfile``.
 
 О настройке PHPStorm для работы с Docker и xDebug 3 можно прочитать в статье `"PHP: Настраиваем отладку" <https://handynotes.ru/2020/12/phpstorm-php-8-docker-xdebug-3.html>`_.
+
+------------------------
+Настройка подсети докера
+------------------------
+
+Docker-compose по умолчанию создаёт подсеть с адресами 172.18.[0-255].[0-255]. 
+
+Если локально запустить докер с дефолтной подсетью, то ресурсы, использующие такие же адреса, будут недоступны - ответ возвращать будет локальная подсеть, а не требуемый ресурс.
+
+Чтобы исправить проблему, нужно изменить адрес подсети докера. 
+
+В файле docker-compose.yml приведён пример замены адресов на 10.10.[0-255].[0-255].
+
+Раскомментируйте строки в docker-compose.yml и выполните следующие команды:
+
+    .. code-block:: bash
+
+        $ docker network rm $(docker network ls -q)
+        $ docker-compose down && docker-compose up -d
