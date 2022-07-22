@@ -65,8 +65,8 @@ services:
     environment:
         PHP_IDE_CONFIG: serverName=localhost
 
-# Change default subnet addresses:
-# networks:
+# Change default subnet addresses (for uncomment - delete only '#'):
+#networks:
 #  default:
 #    driver: bridge
 #    ipam:
