@@ -90,6 +90,14 @@ xDebug 3 is already configured for PHP7 and PHP8 containers. All you have to do 
 
 You can read about configuring PHPStorm to work with Docker and xDebug 3 in the `"Debugging PHP" <https://thecodingmachine.io/configuring-xdebug-phpstorm-docker>`_ article.
 
+In some cases, there may be problems with the settings of xdebug.remote_host (xDebug 2.5.5 for PHP 5.6) and debug.client_host (xDebug 3).
+
+They need to specify the address of the default subnet of the docker, how to find it:
+
+* google - default address for docker subnet, host.docker.internal (at the time of writing - 172.17.0.1)
+
+* manually: ifconfig command, docker0 network, inet field
+
 ------------------------
 Configuring the Docker subnet
 ------------------------
@@ -189,9 +197,17 @@ PHP по умолчанию не отправляют настоящих пис�
 Поддержка xDebug для PHP
 ------------------------
 
-xDebug уже настроен для использования в контейнерах с PHP7 и PHP8. Для его включения нужно раскомментировать установку модуля в ``config/php*/Dockerfile``.
+xDebug уже настроен для использования в контейнерах с PHP5.6, PHP7 и PHP8. Для его включения нужно раскомментировать установку модуля в ``config/php*/Dockerfile``.
 
 О настройке PHPStorm для работы с Docker и xDebug 3 можно прочитать в статье `"PHP: Настраиваем отладку" <https://handynotes.ru/2020/12/phpstorm-php-8-docker-xdebug-3.html>`_.
+
+В некоторых случаях могут возникнуть проблемы с настройками xdebug.remote_host (xDebug 2.5.5 для PHP5.6) и xdebug.client_host (xDebug 3).
+
+В них нужно указать адрес дефолтной подсети докера, как его найти:
+
+* загуглить - default address for docker subnet, host.docker.internal (на момент написания - 172.17.0.1)
+
+* вручную: команда ifconfig, сеть docker0, поле inet
 
 ------------------------
 Настройка подсети докера
