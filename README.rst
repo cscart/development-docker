@@ -86,7 +86,7 @@ See comments in the ``config/nginx/app.conf.example`` file if you need to host m
 Enabling xDebug for PHP containers
 ----------------------------------
 
-xDebug 3 is already configured for PHP7 and PHP8 containers. All you have to do is to uncomment the extension installation in the ``config/php*/Dockerfile`` files.
+xDebug 3 is already configured for PHP5.6, PHP7 and PHP8 containers. All you have to do is to uncomment the extension installation in the ``config/php*/Dockerfile`` files.
 
 You can read about configuring PHPStorm to work with Docker and xDebug 3 in the `"Debugging PHP" <https://thecodingmachine.io/configuring-xdebug-phpstorm-docker>`_ article.
 
