@@ -1,4 +1,4 @@
-FROM php:8.0-rc-fpm
+FROM php:8.1-rc-fpm
 
 ENV VERSION_ONIG=6.9.3
 ENV ONIG_BUILD_DIR=/tmp/oniguruma
@@ -14,7 +14,7 @@ RUN set -xe; \
 
 RUN set -xe; \
     mkdir -p /usr/src/php/ext/imagick; \
-    curl -fsSL https://github.com/Imagick/imagick/archive/448c1cd0d58ba2838b9b6dff71c9b7e70a401b90.tar.gz \
+    curl -fsSL http://pecl.php.net/get/imagick-3.7.0.tgz \
         | tar xvz -C "/usr/src/php/ext/imagick" --strip-components=1;
 
 RUN set -xe; \
