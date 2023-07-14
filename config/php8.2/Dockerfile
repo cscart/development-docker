@@ -1,9 +1,9 @@
-FROM php:7.4-fpm
+FROM php:8.2.8-fpm
 
 ENV VERSION_ONIG=6.9.3
 ENV ONIG_BUILD_DIR=/tmp/oniguruma
 
-RUN set -xe;\
+RUN set -xe; \
     mkdir -p ${ONIG_BUILD_DIR}; \
     curl -Ls https://github.com/kkos/oniguruma/releases/download/v${VERSION_ONIG}/onig-${VERSION_ONIG}.tar.gz \
         | tar xzC ${ONIG_BUILD_DIR} --strip-components=1; \
@@ -12,6 +12,14 @@ RUN set -xe;\
     make -j $(nproc); \
     make install
 
+
+RUN set -xe; \
+    mkdir -p /usr/src/php/ext/imagick; \
+    curl -fsSL https://github.com/Imagick/imagick/archive/refs/tags/3.7.0.tar.gz \
+        | tar xvz -C "/usr/src/php/ext/imagick" --strip-components=1;
+
+
+
 RUN set -xe; \
     apt update; \
     apt install --yes \
@@ -19,18 +27,16 @@ RUN set -xe; \
         git \
         zip unzip \
         curl \
-        libzip-dev libcurl4-gnutls-dev libpng-dev libxml2-dev libjpeg-dev libfreetype6-dev; \
+        libzip-dev libcurl4-gnutls-dev libpng-dev libxml2-dev libjpeg-dev libfreetype6-dev \
+        libmagickwand-dev; \
     curl -sL https://deb.nodesource.com/setup_12.x | bash -; \
     apt install -y nodejs; \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \
-    docker-php-ext-install pdo_mysql mysqli gd json zip intl soap mbstring exif bcmath curl sockets; \
+    docker-php-ext-install pdo_mysql mysqli gd zip intl soap mbstring exif bcmath curl sockets; \
+    docker-php-ext-install imagick; \
+    docker-php-ext-enable imagick; \
     docker-php-ext-enable mysqli;
 
-RUN apt-get update; \
-    apt-get install -y libmagickwand-dev; \
-    pecl install imagick; \
-    docker-php-ext-enable imagick;
-
 # RUN set -xe ; \
-#     pecl install xdebug-3.1.6; \
-#     docker-php-ext-enable xdebug
+    # pecl install xdebug; \
+    # docker-php-ext-enable xdebug
