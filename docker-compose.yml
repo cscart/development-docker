@@ -1,9 +1,23 @@
 version: "3.1"
+
 services:
 
-  mysql5.7:
-    image: mysql:5.7
-    container_name: mysql5.7
+  pma:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - UPLOAD_LIMIT=2024M
+      - MAX_EXECUTION_TIME=6000
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql8
+    depends_on:
+      - mysql8
+
+  mysql8:
+    image: mysql:8
+    container_name: mysql8
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
@@ -61,6 +75,19 @@ services:
     volumes:
       - ./app:/app
       - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./bin/sendmail:/usr/local/bin/sendmail
+    environment:
+        PHP_IDE_CONFIG: serverName=localhost
+
+  php8.2:
+    build:
+      context: ./config/php8.2
+      dockerfile: Dockerfile
+    container_name: php8.2
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./config/php8.2/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
         PHP_IDE_CONFIG: serverName=localhost

@@ -11,8 +11,8 @@ English manual
 
 Docker-based development environment:
 
-* PHP versions: 8.0, 7.4 and 7.3.
-* MySQL 5.7 database server.
+* PHP versions: 8.2, 8.0, 7.4 and 7.3.
+* MySQL 8 database server.
 * nginx web server.
 
 ------------
@@ -50,7 +50,7 @@ Installation
 MySQL connection
 ----------------
         
-* DB host: mysql5.7.
+* DB host: mysql8.
 * User: root.
 * Password: root. 
 
@@ -66,6 +66,7 @@ To use the specific PHP version for your requests, add the following prefix to t
 * ``php7.3.`` for PHP 7.3.
 * ``php7.4.`` for PHP 7.4.
 * ``php8.0.`` for PHP 8.0.
+* ``php8.2.`` for PHP 8.2.
 
 ---------------
 Sending e-mails
@@ -114,8 +115,8 @@ Uncomment the lines in docker-compose.yml and run the following commands:
 
 Среда для разработки на базе Docker:
 
-* Версии PHP: 8.0, 7.4 и 7.3.
-* Сервер баз данных MySQL 5.7.
+* Версии PHP: 8.2, 8.0, 7.4 и 7.3.
+* Сервер баз данных MySQL 8.
 * Веб-сервер nginx.
 
 ---------
@@ -153,7 +154,7 @@ Uncomment the lines in docker-compose.yml and run the following commands:
 Подключение к MySQL
 -------------------
         
-* Хост БД: mysql5.7.
+* Хост БД: mysql8.
 * Пользователь: root.
 * Пароль: root.
 
@@ -168,6 +169,7 @@ Uncomment the lines in docker-compose.yml and run the following commands:
 * ``php7.3.`` для PHP 7.3.
 * ``php7.4.`` для PHP 7.4.
 * ``php8.0.`` для PHP 8.0.
+* ``php8.2.`` для PHP 8.2
 
 ------------------
 Отправка e-mail'ов
