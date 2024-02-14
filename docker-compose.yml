@@ -52,7 +52,7 @@ services:
       - ./config/php7.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
-        PHP_IDE_CONFIG: serverName=Docker2
+        PHP_IDE_CONFIG: serverName=localhost
 
   php8.0:
     build:
@@ -65,7 +65,7 @@ services:
       - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
-      PHP_IDE_CONFIG: serverName=Docker2
+      PHP_IDE_CONFIG: serverName=localhost
 
   php8.1:
     build:
@@ -78,7 +78,7 @@ services:
       - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
-      PHP_IDE_CONFIG: serverName=Docker2
+      PHP_IDE_CONFIG: serverName=localhost
 
   php8.2:
     build:
@@ -91,7 +91,7 @@ services:
       - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
-      PHP_IDE_CONFIG: serverName=Docker2
+      PHP_IDE_CONFIG: serverName=localhost
 
 # Change default subnet addresses (for uncomment - delete only '#'):
 #networks:
