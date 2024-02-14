@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 ENV VERSION_ONIG=6.9.3
 ENV ONIG_BUILD_DIR=/tmp/oniguruma
@@ -30,10 +30,10 @@ RUN set -xe; \
     apt-get install -y nodejs; \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \
     docker-php-ext-install pdo_mysql mysqli gd zip intl soap mbstring exif bcmath curl sockets; \
-    docker-php-ext-install imagick; \
+    pecl install imagick; \
     docker-php-ext-enable imagick; \
     docker-php-ext-enable mysqli;
 
-# RUN set -xe ; \
+# RUN set -xe; \
 #     pecl install xdebug; \
 #     docker-php-ext-enable xdebug
