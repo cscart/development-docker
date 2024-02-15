@@ -14,4 +14,4 @@ cli-8.1: run
 	docker exec -it php8.1 bash
 
 cli-8.2: run
-	docker exec -it php8.1 bash
+	docker exec -it php8.2 bash
