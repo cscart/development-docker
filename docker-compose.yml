@@ -75,7 +75,7 @@ services:
     working_dir: /app
     volumes:
       - ./app:/app
-      - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./config/php8.1/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
       PHP_IDE_CONFIG: serverName=localhost
@@ -88,7 +88,7 @@ services:
     working_dir: /app
     volumes:
       - ./app:/app
-      - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./config/php8.2/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
       PHP_IDE_CONFIG: serverName=localhost
