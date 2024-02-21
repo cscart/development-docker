@@ -25,6 +25,8 @@ services:
       - php7.3
       - php7.4
       - php8.0
+      - php8.1
+      - php8.2
 
   php7.3:
     build:
@@ -63,7 +65,33 @@ services:
       - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
     environment:
-        PHP_IDE_CONFIG: serverName=localhost
+      PHP_IDE_CONFIG: serverName=localhost
+
+  php8.1:
+    build:
+      context: config/php8.1
+      dockerfile: Dockerfile
+    container_name: php8.1
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./config/php8.1/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./bin/sendmail:/usr/local/bin/sendmail
+    environment:
+      PHP_IDE_CONFIG: serverName=localhost
+
+  php8.2:
+    build:
+      context: config/php8.2
+      dockerfile: Dockerfile
+    container_name: php8.2
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./config/php8.2/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./bin/sendmail:/usr/local/bin/sendmail
+    environment:
+      PHP_IDE_CONFIG: serverName=localhost
 
 # Change default subnet addresses (for uncomment - delete only '#'):
 #networks:
