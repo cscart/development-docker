@@ -5,6 +5,8 @@ map $http_host $fastcgi_backend {
     ~^php7.3. php7.3:9000;
     ~^php7.4. php7.4:9000;
     ~^php8.0. php8.0:9000;
+    ~^php8.1. php8.1:9000;
+    ~^php8.2. php8.2:9000;
 }
 
 server {
